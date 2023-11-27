@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Military Map Points</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: #2B2B2B;
+            color: #FFFFFF;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #4CAF50;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            display: none; /* Hide the list initially */
+        }
+
+        li {
+            padding: 10px;
+            border-bottom: 1px solid #4CAF50;
+            overflow: hidden;
+            white-space: nowrap;
+            animation: typing 1.5s steps(30, end);
+        }
+
+        script {
+            display: none; /* Hide the script tag */
+        }
+
+        .loading-screen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            color: #FFFFFF;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="loading-screen" id="loadingScreen">
+    <p>Connecting to nearest satellite...</p>
+    <div id="loadingAnimation">⠋</div>
+</div>
+
+<script>
+    var password = prompt("Please enter the password:");
+
+    if (password !== "TaC") {
+        document.body.innerHTML = '<h1>Incorrect password. Access denied.</h1>';
+    } else {
+        showLoadingScreen();
+        setTimeout(function () {
+            hideLoadingScreen();
+        }, 30000); // 30 seconds delay
+    }
+
+    function showLoadingScreen() {
+        document.getElementById('loadingScreen').style.display = 'flex';
+        animateLoading();
+    }
+
+    function hideLoadingScreen() {
+        document.getElementById('loadingScreen').style.display = 'none';
+        document.querySelector('ul').style.display = 'block'; // Display the list after loading
+    }
+
+    function animateLoading() {
+        var animationFrames = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'];
+        var frameIndex = 0;
+
+        function updateFrame() {
+            document.getElementById('loadingAnimation').textContent = animationFrames[frameIndex];
+            frameIndex = (frameIndex + 1) % animationFrames.length;
+        }
+
+        setInterval(updateFrame, 100);
+    }
+</script>
+
+<h1>Military Map Points</h1>
+
+<ul>
+    <li>Point S: 52.342971, 21.080487</li>
+    <li>Point M: 52.343464, 21.084970</li>
+    <li>Point R: 52.344128, 21.083820</li>
+    <li>Point A: 52.348803, 21.087645</li>
+    <li>Point G: 52.356630, 21.095358</li>
+</ul>
+
+</body>
+</html>
